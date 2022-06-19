@@ -12,19 +12,25 @@ const ajv = new Ajv({ coerceTypes: true })
 
 router.post("/upload", async (req, res,) => {
 	upload(req, res, async (err) => {
-		if (err instanceof multer.MulterError) {
+		
+		 if (err instanceof multer.MulterError) {
 			return res.status(BAD_REQUEST).json({ 
 				code: err.code,
 				message: err.message,
 			});
 		} else if (err) {
-			const status = err.code || INTERNAL_SERVER_ERROR;
-			return res.status(status).json({ 
-				code: status,
+			return res.status(INTERNAL_SERVER_ERROR).json({ 
+				code: INTERNAL_SERVER_ERROR,
 				message: err.message || "Error trying to upload file",
 			});
+		} else if (!req.file) {
+			return res.status(BAD_REQUEST).json({ 
+				code: BAD_REQUEST,
+				message: "Should upload a file"
+			});
 		}
-	
+
+
 		const validate = ajv.compile(bodyPostSchema);
 		const isValidData = validate(req.body);
 
@@ -44,7 +50,13 @@ router.post("/upload", async (req, res,) => {
 		let columns = null;
 
 		if(!header) {
-			columns = req.columns.split(delimiter)
+			if (!req.body.columns) {
+				return res.status(BAD_REQUEST).json({ 
+					code: BAD_REQUEST,
+					errors: "Should indicate columns",
+				});
+			}
+			columns = req.body.columns.split(delimiter)
 		}
 		const csvToJSON = [];
 		

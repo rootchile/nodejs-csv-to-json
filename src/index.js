@@ -3,8 +3,9 @@ const app = require("./app");
 const fs = require("fs");
 const https = require("https");
 
+console.log("ENABLED SSL", ENABLE_SSL)
 
-if (ENABLE_SSL) {
+if (ENABLE_SSL==="true") {
 	https
 		.createServer({
 			key: fs.readFileSync(`${SSL_PATH}/key.pem`),
