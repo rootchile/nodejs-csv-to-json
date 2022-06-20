@@ -1,7 +1,6 @@
 # Hackathon Barcelona Tech - CSV Converter to JSON
 
-This repository contains a little endpoint that allows converting CSV files to JSON format. It has been developed in the context of 
-[Hackathon Barcelona 2022](https://nuwe.io/challenge/hackathon-bcn-inclusive-coding-backend)
+This repository contains a little endpoint that allows converting CSV files to JSON format. 
 
 
 ## Solution scope
