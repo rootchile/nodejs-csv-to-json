@@ -1,4 +1,4 @@
-# Hackathon Barcelona Tech - CSV Converter to JSON
+# CSV Converter to JSON
 
 This repository contains a little endpoint that allows converting CSV files to JSON format. 
 
